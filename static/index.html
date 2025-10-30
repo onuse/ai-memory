@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Memory - Chat Interface</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>AI Memory</h1>
+                <span class="status" id="status">
+                    <span class="status-dot"></span>
+                    <span id="status-text">Connecting...</span>
+                </span>
+            </div>
+            <div class="header-right desktop-only">
+                <button class="btn btn-secondary" id="clear-btn" title="Clear conversation">
+                    <span>Clear Chat</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Sidebar with stats (desktop only) -->
+            <aside class="sidebar desktop-only">
+                <div class="stats-card">
+                    <h3>Database Stats</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Entities</span>
+                        <span class="stat-value" id="stat-entities">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Relationships</span>
+                        <span class="stat-value" id="stat-relationships">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Conversations</span>
+                        <span class="stat-value" id="stat-conversations">-</span>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>Session Info</h3>
+                    <div class="info-item">
+                        <span class="info-label">Memories Retrieved</span>
+                        <span class="info-value" id="memories-count">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Messages</span>
+                        <span class="info-value" id="message-count">0</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Chat area -->
+            <main class="chat-container">
+                <div class="messages" id="messages">
+                    <div class="message system-message">
+                        <div class="message-content">
+                            <p><strong>System:</strong> Connected to AI Memory. Your conversation history will be stored in the graph database.</p>
+                            <p class="mobile-stats mobile-only">
+                                <span id="mobile-stats">DB: 0 entities, 0 relationships</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typing indicator -->
+                <div class="typing-indicator" id="typing-indicator" style="display: none;">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+
+                <!-- Input area -->
+                <div class="input-container">
+                    <textarea
+                        id="message-input"
+                        placeholder="Type your message... (Press Enter to send, Shift+Enter for new line)"
+                        rows="1"
+                    ></textarea>
+                    <button class="btn btn-primary" id="send-btn" title="Send message">
+                        <span>Send</span>
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/static/chat.js"></script>
+</body>
+</html>

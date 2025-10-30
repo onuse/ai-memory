@@ -2,9 +2,12 @@
 import logging
 import uuid
 import asyncio
+from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from src.config import settings
 from src.models import ChatRequest, ChatResponse
@@ -60,15 +63,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount static files
+static_path = Path(__file__).parent.parent / "static"
+app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
+
 
 @app.get("/")
 async def root():
-    """Root endpoint."""
-    return {
-        "name": "AI Memory",
-        "version": "0.1.0",
-        "status": "running",
-    }
+    """Serve the chat UI."""
+    return FileResponse(str(static_path / "index.html"))
 
 
 @app.get("/health")
